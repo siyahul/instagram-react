@@ -6,11 +6,31 @@
   
 }
 .app__header{
-  
+  position: sticky;
+  top: 0;
+  background-color:white;
+  z-index: 1;
   padding:20px;
-  border-bottom: 1px solid lightGrey
+  border-bottom: 1px solid lightGrey;
+  justify-content:space-between;
+  display:flex;
+
 }
 .app__headerImage{
   background-color: white;
   object-fit: contain;
+}
+.app__signUp{
+  display:flex;
+  flex-direction: column;
+}
+.app__posts{
+  display:flex;
+  padding :20px;
+  justify-content: center;
+}
+.app__imageUploadError{
+  padding-top: 10px;
+  display:flex;
+  justify-content:center;
 }

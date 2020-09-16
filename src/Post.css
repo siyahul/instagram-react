@@ -22,3 +22,30 @@
     font-weight:normal;
     padding:20px;
 }
+.post__commentBox{
+    display:flex;
+    margin-top:10px;
+}
+.post__input{
+    flex:1;
+    border:none;
+    padding:10px;
+    border-top:1px solid lightGrey;
+}
+.post__button{
+    flex:0;
+    color:#6082a3;
+    background-color: transparent;
+    border:none;
+    border-top: 1px solid lightGrey;
+}
+.post__comments{
+    padding:20px;
+}
+.post__commentError{
+    display:flex;
+    justify-content:center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid lightGrey;
+}
