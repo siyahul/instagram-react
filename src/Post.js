@@ -5,11 +5,11 @@ import {db} from './firebase.js'
 import firebase from 'firebase'
 function Post({imageURL,username,caption,postURL,postId,user}) {
     const [comments,setComments] = useState([]);
-    const [comment,setComment] = useState('');
+    const [comment,setComment] = useState([]);
     useEffect(() => {
         let unsubscribe;
         if(postId) {
-            unsubscribe = db.collection('posts').doc(postId).collection('comments').orderBy("timestamp","desc").onSnapshot((snapshot) => {setComments(snapshot.docs.map((doc)=> doc.data()));});
+            unsubscribe = db.collection('posts').doc(postId).collection('comments').orderBy("timestamp","desc").onSnapshot((snapshot) => {setComments(snapshot.docs.map(doc=> ({id:doc.id,data:doc.data()})));});
         }
     });
 
@@ -21,6 +21,10 @@ function Post({imageURL,username,caption,postURL,postId,user}) {
             username:user.displayName
         });
         setComment('')
+    }
+
+    const removeComment = (key) =>{
+        db.collection('posts').doc(postId).collection('comments').doc(key).delete();
     }
 
     return (
@@ -37,7 +41,7 @@ function Post({imageURL,username,caption,postURL,postId,user}) {
             <h4 className="post__text"><strong>{username}:</strong>{caption}</h4>
 
             <div className="post__comments">
-                {comments.map((comments)=>(<p><strong>{comments.username}</strong>: {comments.text}</p>))}
+                {comments.map((comments)=>(<p><strong>{comments.data.username}</strong>: {comments.data.text} <button onClick={()=>{removeComment(comments.id)}}>remove</button></p>))}
                 
             </div>
             {user?(
